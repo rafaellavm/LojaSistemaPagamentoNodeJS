@@ -1,9 +1,4 @@
-var express = require('express');
-
-var app = express();
-
-//set(): definir variáveis pra dentro do express
-app.set('view engine', 'ejs');
+var app = require('./config/express')();
 
 //configuração de rota
 app.get('/produtos',function(request,response){
