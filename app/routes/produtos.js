@@ -13,7 +13,8 @@ module.exports = function (app) {
             database: 'lojasistemapagamento'
         });
         connection.query('SELECT *FROM livros', function(err, results){
-            res.send(results);
+            //coloca o resultado na variável (chave) 'lista' pra ser chamado lá na página
+            res.render('produtos/lista', {lista:results});
         });
         connection.end();
 
