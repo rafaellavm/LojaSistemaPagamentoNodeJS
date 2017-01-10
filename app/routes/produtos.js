@@ -3,11 +3,15 @@ module.exports = function (app) {
 
         //o express load cria objetos das pastas carregadas
         var connection = app.infra.connectionFactory();
+        var produtosBanco = app.infra.produtosBanco;
 
-        connection.query('SELECT *FROM livros', function(err, results){
+        produtosBanco.lista(connection, function(err, results){
             //coloca o resultado na variável (chave) 'lista' pra ser chamado lá na página
             res.render('produtos/lista', {lista:results});
         });
         connection.end();
     });
 }
+
+
+
