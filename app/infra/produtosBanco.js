@@ -5,7 +5,6 @@ module.exports = function () {
         this.lista = function (callback) {
             connection.query('SELECT *FROM livros', callback);
         }
-
         return this;
     }
 }

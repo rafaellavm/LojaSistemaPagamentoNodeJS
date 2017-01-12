@@ -4,7 +4,7 @@ module.exports = function (app) {
 
         //o express load cria objetos das pastas carregadas
         var connection = app.infra.connectionFactory();
-        var produtosBanco = app.infra.produtosBanco(connection);
+        var produtosBanco = new app.infra.produtosBanco(connection);
 
         produtosBanco.lista(function(err, results){
             //coloca o resultado na variável (chave) 'lista' pra ser chamado lá na página
