@@ -13,6 +13,11 @@ module.exports = function (app) {
         connection.end();
     });
 
+    //mesma coisa que dizer: "toda vez que eu digitar /form vc execute essa função associada a esse endereço"
+    app.get('/produtos/form', function(req,res){
+        res.render('produtos/form');
+    });
+
     /* app.get('/produtos/remove', function (req, res) {
 
         //o express load cria objetos das pastas carregadas
