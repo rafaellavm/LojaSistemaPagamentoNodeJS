@@ -23,7 +23,7 @@ module.exports = function (app) {
     });
 
     //form.ejs, salvando no formulário
-    app.post('/produtos/salva', function (req, res) {
+    app.post('/produtos', function (req, res) {
 
         //os dados que foram enviados do formulário através de um post eles ficam todos dentro da propriedade body do seu request
         //o request é um objeto que vem do express, o express já fornece o conteúdo que vem do formulário
