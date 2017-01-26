@@ -1,7 +1,26 @@
 module.exports = function (app) {
 
-    var listaProdutos = function (req, res) {
+     app.get('/produtos', function (req, res) {
+        //o express load cria objetos das pastas carregadas
+        var connection = app.infra.connectionFactory();
+        var produtosDAO = new app.infra.ProdutosDAO(connection);
 
+        produtosDAO.lista(function (err, results) {
+            res.format({
+                html: function(){
+                    res.render('produtos/lista', {lista: results});
+                },
+                json: function(){
+                    res.json(results);
+                }
+            })
+        });
+        connection.end();
+     });
+
+    /*--------------------------------------------------
+    
+    var listaProdutos = function (req, res) {
         //o express load cria objetos das pastas carregadas
         var connection = app.infra.connectionFactory();
         var produtosDAO = new app.infra.ProdutosDAO(connection);
@@ -14,8 +33,12 @@ module.exports = function (app) {
         });
         connection.end();
     };
+     
+     app.get('/produtos', listaProdutos);
+    
+    --------------------------------------------------*/
 
-    app.get('/produtos', listaProdutos);
+   
 
     //mesma coisa que dizer: "toda vez que eu digitar /form vc execute essa função associada a esse endereço"
     app.get('/produtos/form', function (req, res) {
