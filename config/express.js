@@ -13,6 +13,9 @@ module.exports = function() {
     //urlencoded: é o formato que o formulário envia os dados para o nosso servidor por default
     app.use(bodyParser.urlencoded({extended:true}));
 
+    //pra aceitar json
+    app.use(bodyParser.json());
+
     //aqui a gente informa quais arquivos vão ser carregados por ele
     //é necessário indicar a pasta 'routes'. Assim tudo que está nessa pasta vai ser carregado dentro da 'app'
     //também vamos carregar tudo que está dentro da pasta 'infra' com o 'then()'

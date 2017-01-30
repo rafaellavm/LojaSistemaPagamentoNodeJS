@@ -10,8 +10,8 @@ var configuracoes = {
 };
 
 http.get(configuracoes, function(res){
-    console.log(res.statusCode);
+    //console.log(res.statusCode);
     res.on('data', function(body){
-        console.log('Corpo: ' + body);
+        //console.log('Corpo: ' + body);
     });
 });
