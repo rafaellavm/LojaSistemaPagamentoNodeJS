@@ -20,7 +20,7 @@ module.exports = function (app) {
      
      //mesma coisa que dizer: "toda vez que eu digitar /form vc execute essa função associada a esse endereço"
     app.get('/produtos/form', function (req, res) {
-        res.render('produtos/form');
+        res.render('produtos/form', {errosValidacao: {}});
     });
 
     //form.ejs, salvando no formulário
@@ -29,17 +29,16 @@ module.exports = function (app) {
         //os dados que foram enviados do formulário através de um post eles ficam todos dentro da propriedade body do seu request
         //o request é um objeto que vem do express, o express já fornece o conteúdo que vem do formulário
         var produto = req.body;
-        console.log(produto);
-        
+
         //retorna uma validação para o título (express-validator)
-        var validatorTitulo = req.assert('titulo', 'Título é obrigatório');
-        validatorTitulo.notEmpty();
+        req.assert('titulo', 'Título é obrigatório').notEmpty();
+        req.assert('preco', 'Formato inválido').isFloat();
 
         //verifica se existe erros (express-validator)
         var erros = req.validationErrors();
 
         if(erros){
-            res.render('produtos/form');
+            res.render('produtos/form',{errosValidacao:erros});
             return;
         }
 
