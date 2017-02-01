@@ -3,6 +3,7 @@ var express = require('express');
 var load = require('express-load');
 //carrevar o body parser
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 
 module.exports = function() {
     var app = express();
@@ -15,6 +16,8 @@ module.exports = function() {
 
     //pra aceitar json
     app.use(bodyParser.json());
+
+    app.use(expressValidator());
 
     //aqui a gente informa quais arquivos vão ser carregados por ele
     //é necessário indicar a pasta 'routes'. Assim tudo que está nessa pasta vai ser carregado dentro da 'app'
