@@ -20,7 +20,7 @@ module.exports = function (app) {
      
      //mesma coisa que dizer: "toda vez que eu digitar /form vc execute essa função associada a esse endereço"
     app.get('/produtos/form', function (req, res) {
-        res.render('produtos/form', {errosValidacao: {}});
+        res.render('produtos/form', {errosValidacao: {}, produto: {}});
     });
 
     //form.ejs, salvando no formulário
@@ -38,7 +38,7 @@ module.exports = function (app) {
         var erros = req.validationErrors();
 
         if(erros){
-            res.render('produtos/form',{errosValidacao:erros});
+            res.render('produtos/form',{errosValidacao:erros, produto: produto});
             return;
         }
 
