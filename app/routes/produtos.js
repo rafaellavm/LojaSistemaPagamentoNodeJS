@@ -38,6 +38,16 @@ module.exports = function (app) {
         var erros = req.validationErrors();
 
         if(erros){
+            //se o erro for um html (no caso de acesso pelo console cadastra-livros-terminal)
+            res.format({
+                html: function(){
+                    res.status(400).render('produtos/form',{errosValidacao:erros, produto: produto});
+                },
+                json: function(){
+                    res.status(400).json(erros);
+                }
+            });
+            
             res.render('produtos/form',{errosValidacao:erros, produto: produto});
             return;
         }

@@ -21,7 +21,7 @@ var client = http.request(configuracoes, function(res){
 });
 
 var produto = {
-    titulo: 'Msis sobre Node',
+    titulo: '',
     descricao: 'Node Javascript',
     preco: 100
 }
