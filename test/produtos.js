@@ -1,4 +1,26 @@
-var http = require('http');
+//var http = require('http');
+var express = require('../config/express')();
+var request = require('supertest')(express);
+
+describe('ProdutosController', function () {
+
+    //verificar se a nossa lisatagem se produz json está funcionando
+    it('listagem json', function (done) {
+        request.get('/produtos')
+        //ele espera (expect) que o retorno seja json e que seja status 200
+        .set('Accept', 'application/json')
+        .expect('Content-type',/json/)
+        .expect(200, done);
+
+
+
+    });
+});
+
+
+
+
+/*var http = require('http');
 var assert = require('assert');
 
 describe('ProdutosController', function () {
@@ -21,4 +43,5 @@ describe('ProdutosController', function () {
             done();
         });
     });
-});
+});*/
+
