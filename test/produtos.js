@@ -11,10 +11,26 @@ describe('ProdutosController', function () {
         .set('Accept', 'application/json')
         .expect('Content-type',/json/)
         .expect(200, done);
+     });
 
+     it('#cadastro de novos produtos com dados inválidos', function(done){
+        request.post('/produtos')
+        .send({
+            titulo: '',
+            descricao: 'novo livro'
+        })
+        .expect(400,done);
+     });
 
-
-    });
+      it('#cadastro de novos produtos com dados válidos', function(done){
+        request.post('/produtos')
+        .send({
+            titulo: 'titulo',
+            descricao: 'novo livro',
+            preco: 20.50
+        })
+        .expect(302,done);
+     });
 });
 
 
