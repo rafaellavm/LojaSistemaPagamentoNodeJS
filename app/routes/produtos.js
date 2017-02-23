@@ -1,26 +1,35 @@
 module.exports = function (app) {
 
-     app.get('/produtos', function (req, res) {
+    app.get('/produtos', function (req, res) {
         //o express load cria objetos das pastas carregadas
         var connection = app.infra.connectionFactory();
         var produtosDAO = new app.infra.ProdutosDAO(connection);
 
         produtosDAO.lista(function (err, results) {
+            if (err) {
+                return next(err);
+            }
+
             res.format({
-                html: function(){
-                    res.render('produtos/lista', {lista: results});
+                html: function () {
+                    res.render('produtos/lista', {
+                        lista: results
+                    });
                 },
-                json: function(){
+                json: function () {
                     res.json(results);
                 }
             })
         });
         connection.end();
-     });
-     
-     //mesma coisa que dizer: "toda vez que eu digitar /form vc execute essa função associada a esse endereço"
+    });
+
+    //mesma coisa que dizer: "toda vez que eu digitar /form vc execute essa função associada a esse endereço"
     app.get('/produtos/form', function (req, res) {
-        res.render('produtos/form', {errosValidacao: {}, produto: {}});
+        res.render('produtos/form', {
+            errosValidacao: {},
+            produto: {}
+        });
     });
 
     //form.ejs, salvando no formulário
@@ -37,18 +46,24 @@ module.exports = function (app) {
         //verifica se existe erros (express-validator)
         var erros = req.validationErrors();
 
-        if(erros){
+        if (erros) {
             //se o erro for um html (no caso de acesso pelo console cadastra-livros-terminal)
             res.format({
-                html: function(){
-                    res.status(400).render('produtos/form',{errosValidacao:erros, produto: produto});
+                html: function () {
+                    res.status(400).render('produtos/form', {
+                        errosValidacao: erros,
+                        produto: produto
+                    });
                 },
-                json: function(){
+                json: function () {
                     res.status(400).json(erros);
                 }
             });
-            
-            res.render('produtos/form',{errosValidacao:erros, produto: produto});
+
+            res.render('produtos/form', {
+                errosValidacao: erros,
+                produto: produto
+            });
             return;
         }
 
@@ -64,7 +79,7 @@ module.exports = function (app) {
 
 
 
-      /*--------------------------------------------------
+    /*--------------------------------------------------
     
     var listaProdutos = function (req, res) {
         //o express load cria objetos das pastas carregadas

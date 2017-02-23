@@ -20,7 +20,7 @@ var connectMYSQL = function () {
             user: 'root',
             password: '',
             port: '3306',
-            database: 'lojasistemapagamento_test'
+            database: 'lojasistemapagamento_teste'
         });
     }
 
