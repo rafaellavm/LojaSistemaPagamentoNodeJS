@@ -2,10 +2,20 @@
 var express = require('../config/express')();
 var request = require('supertest')(express);
 
-describe('ProdutosController', function () {
+describe('#ProdutosController', function () {
+
+    //limpa o banco
+    beforeEach(function(done){
+        var conn = express.infra.connectionFactory();
+        conn.query('delete from livros', function(ex,result){
+            if(!ex){
+                done();
+            }
+        });
+    });
 
     //verificar se a nossa lisatagem se produz json está funcionando
-    it('listagem json', function (done) {
+    it('#listagem json', function (done) {
         request.get('/produtos')
         //ele espera (expect) que o retorno seja json e que seja status 200
         .set('Accept', 'application/json')
